@@ -1,0 +1,5 @@
+ $mpdf=new mPDF();
+ $mpdf->WriteHTML('Your Introduction');
+ $mpdf->AddPage('L','','','','',50,50,50,50,10,10);
+ $mpdf->WriteHTML('Your Book text');
+ $mpdf->AddPage('P','','','','',50,50,50,50,10,10);

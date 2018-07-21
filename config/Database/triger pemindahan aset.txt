@@ -1,0 +1,18 @@
+BEGIN
+IF (EXISTS (SELECT ID_Kondisi FROM rf_aset_barang_detail WHERE ID_Kondisi = NEW.ID_Kondisi and id = NEW.id)) THEN
+
+UPDATE rf_aset_barang SET Jumlah_Barang = Jumlah_Barang - 1
+WHERE ID_Barang = NEW.ID_Barang;
+
+IF NOT (EXISTS (SELECT ID_Kategori, ID_Unit_Sub, ID_Tipe, Merk_Barang, Tahun_Barang FROM rf_aset_barang WHERE ID_Kategori = ID_Kategori and ID_Unit_Sub = NEW.ID_Unit_Sub and ID_Tipe = ID_Tipe and Merk_Barang = Merk_Barang and Tahun_Barang = Tahun_Barang)) THEN
+
+INSERT INTO rf_aset_barang (ID_Kategori, ID_Unit_Sub, ID_Tipe, Merk_Barang, Tahun_Barang, Jumlah_Barang, Deskripsi_Barang) SELECT ID_Kategori, NEW.ID_Unit_Sub, ID_Tipe, Merk_Barang, Tahun_Barang, Jumlah_Barang, Deskripsi_Barang FROM rf_aset_barang WHERE ID_Barang = NEW.ID_Barang;
+
+ELSE
+
+UPDATE rf_aset_barang SET Jumlah_Barang = Jumlah_Barang + 1 WHERE ID_Kategori = rf_aset_barang.ID_Kategori and ID_Unit_Sub = NEW.ID_Unit_Sub and Tahun_Barang = rf_aset_barang.Tahun_Barang and ID_Tipe = ID_Tipe and Merk_Barang = rf_aset_barang.Merk_Barang;
+
+END IF;
+
+END IF;
+END

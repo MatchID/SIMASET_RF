@@ -1,0 +1,30 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+Options All -Indexes
+RewriteBase /
+
+#RewriteRule ^page-name$ http://localhost/SIMASET-UIN-RF/?menu=dashboard
+#RewriteRule ^data-master/([^/.]+)$ SIMASET-UIN-RF/?menu=$1
+#RewriteRule ^data-master/([^/.]+)/([^/.]+)\.html$ SIMASET-UIN-RF/?menu=$1&act=$2
+#RewriteRule ^inventaris/([^/.]+)/([^/.]+)/([^/.]+)\.html$ SIMASET-UIN-RF/?menu=$1&act=$2&aset=$3
+</IfModule>
+
+# bad syntax
+ErrorDocument 400 /errors/400.html
+
+# unautorized
+ErrorDocument 401 /errors/401.html
+
+# forbiden
+ErrorDocument 403 http://localhost/SIMASET-UIN-RF/?r=403
+
+# not found
+ErrorDocument 404 http://localhost/SIMASET-UIN-RF/?r=404
+
+
+
+# internal server error
+ErrorDocument 500 http://localhost/SIMASET-UIN-RF/?r=500
+
+# gateway timeout
+ErrorDocument 503 /src/error/page_500.html
